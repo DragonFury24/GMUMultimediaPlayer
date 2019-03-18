@@ -1,7 +1,7 @@
 public class LoadException extends Exception {
-    private String msg = "";
+    private String msg;
 
-    public LoadException(String mes) {
+    public LoadException(String msg) {
         this.msg = msg;
     }
 }
