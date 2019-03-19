@@ -1,5 +1,5 @@
 public interface StillImage {
-  public int width();
-  public int height();
-  public int getPixel(int x, int y); 
+  int width();
+  int height();
+  int getPixel(int x, int y);
 }
