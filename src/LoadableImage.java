@@ -3,13 +3,15 @@ public class LoadableImage implements Loadable, StillImage {
     int width;
     int height;
 
+    int[] data;
     public LoadableImage() {
 
     }
 
-    public LoadableImage(int w, int h) {
+    public LoadableImage(int w, int h, int[] data) {
         width = w;
         height = h;
+        this.data = data;
     }
 
     @Override
@@ -26,7 +28,7 @@ public class LoadableImage implements Loadable, StillImage {
             e.printStackTrace();
         }
 
-        return new LoadableImage(data[1], data[2]);
+        return new LoadableImage(data[1], data[2], data);
     }
 
     @Override
@@ -41,9 +43,14 @@ public class LoadableImage implements Loadable, StillImage {
 
     @Override
     public int getPixel(int x, int y) {
-        //
+        try {
+            if (data == null)
+                throw new Exception("No data loaded.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-
+        return ((2 * y) + x) + 3;
     }
 
     private boolean checkData(int[] data) {
