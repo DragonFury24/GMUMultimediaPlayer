@@ -64,18 +64,19 @@ public class LoadableImage implements Loadable, StillImage {
             e.printStackTrace();
         }
 
-        return ((2 * y) + x) + 3;
+        //SparseMatrix keyValue implementation
+        return data[((x * width()) + y) + 3];
     }
 
     private boolean checkData(int[] data) {
         if (!matches(data))
             return false;
 
+        //Check if proper width/height values are given
         if (data[1] == 0 || data[2] == 0)
             return false;
 
+        //number of supplied values are greater than width * height
         return data.length - 3 > data[1] * data[2];
     }
-
-    private
 }
