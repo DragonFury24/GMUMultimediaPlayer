@@ -82,6 +82,14 @@ public class LoadableImage implements Loadable, StillImage {
         return data.length - 3 > data[1] * data[2];
     }
 
+    public void NoDataLoadedException() {
+        try {
+            throw new Exception("No data loaded.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private int[][] initGrid(int[] data) {
         int[][] to2D = new int[data[1]][data[2]];
 
