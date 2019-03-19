@@ -1,0 +1,314 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- saved from url=(0186)https://mymasonportal.gmu.edu/bbcswebdav/pid-8964737-dt-content-rid-160741019_1/courses/16097.201910_16098.201910_16099.201910_16100.201910_16122.201910_16123.201910_Master/Project3.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    
+    <meta name="Description" content="CS 211 Project 3">
+    <title>Project 3 for CS 211 / Spring 2019</title>
+    <style type="text/css">
+	  body { background-color: #eee; }
+      a { color: #284; }
+      code { color: #284; }
+  	  div.code { padding: 1em; padding-top: 0; border: groove; border-radius: 8px; }
+      .heading { color: #060; font-variant: small-caps; text-align: center; }
+	  .summary { text-align: center; }
+	  .notice { color: #f00; }
+      .heading .l1 { font-size: 1.5em; }
+      .heading .l2 { font-size: 1em; }
+      .body { font-size: .8em; }
+      .section { font-weight: bold; font-variant: small-caps; }
+      .unspec { font-style: italic; }
+      .name { font-style: italic; }
+      .emph { font-weight: bold; }
+      table.a { width: 100%; border-collapse: collapse; border: thin solid; }
+      table.a td { border-right: thin solid; text-align: center; }
+      table.a tr:nth-child(even) { border-top: thin solid; }
+      table.a tr:nth-child(odd) { background-color: rgba(0,0,0,0.05); }
+      table i { color: #284; }
+      table.b { border-collapse: collapse; 
+          border-top: thin solid; border-bottom: thin solid; }
+      table.b th { border-bottom: thin solid; 
+          padding-right: 2em; padding-left: 2em; }
+      table.b td { text-align: center; }
+	  table.b tr.w { border-top: thin solid; }
+      table.b tr:nth-child(odd) { background-color: rgba(0,0,0,0.05); }
+    </style>
+  </head>
+  <body>
+    <div class="heading">
+      <span class="l1">CS 211, all sections</span><br>
+      <span class="l2">Project 3</span><br>
+      <span class="l2">due Sunday, March 31th at midnight</span><br>
+      <p>
+    </p></div>
+	<div class="body">
+ 	  <hr>
+	  <div class="summary">The objective of this project is to implement a multimedia player which can load and playback different types of multimedia files (in this case only still images and audio data, and output only to a text terminal), in order to understand and exercise the use of interfaces and exceptions.</div>
+	  <hr><p>
+	  <span class="section">Overview:</span>
+	  </p><ol>
+	      <li>Download and review the provided interfaces, <code>Loadable</code>, <code>Player</code>, <code>StillImage</code>, and <code>AudioStream</code>.</li>
+		  <li>Implement the exception type <code>LoadException</code> which will be used to signal errors while loading multimedia files.</li>
+		  <li>Implement the class <code>LoadableImage</code> which would allow loading a still image from a text file.
+          </li><li>Implement the abstract class <code>ImageViewer</code> and concrete subclass <code>TextImageViewer</code>, which allows a <code>StillImage</code> to be viewed in a terminal using text art.  Test your viewer with the provided sample images.		  
+		  </li><li>Implement the class <code>LoadableAudio</code> which would allow loading an audio stream from a text file.
+          </li><li>Implement the abstract class <code>AudioPlayer</code> and concrete subclass <code>TextAudioPlayer</code>, which allows an <code>AudioStream</code> to be viewed as a wave output in a terminal using text art.  Test your viewer with the provided sample.		  
+		  </li><li>Students in the honors section will have an additional subclass and functionality to complete for full credit.</li>
+          <li>Download and use the tester module to ensure that your program is correct.</li>
+          <li>Prepare the assignment for submission and submit it.</li>		  
+	  </ol>
+	    A multimedia player is a piece of software which needs no introduction.  We're all likely to have used one to do anything from playing CDs or DVDs, to audio or video files.  One thing we might notice is that when we do this, we don't have to think too hard about what kind of file we're clicking on.  We just click on it, and then it opens up in the player, whatever the format and whatever the type of media it is (because if we think about it, images and sound are two different things).  This is something we can do thanks in part to object-oriented programming.  When we select a file, we don't have to care too much about what it is, so long as it's something which is loadable by the player.  And whatever kind of media it is, the player figures out the right thing to do with it.
+        <p>
+        For this project, we will write a simplified version of this sort of interface.  We will write our own multimedia player, which is capable of playing different kind of media files.  We will of course make a few simplifications to fit this project within a two week window, but it will still be enough to demonstrate the mechanism.  For example, we will only be implementing an <i>audio</i> and <i>still image</i> player; we will use our own text-only media file formats; and our output will all be done visually on the terminal using text art.
+		</p><p>
+		When we implement this project, we will practice two main language features: interfaces and exceptions.  We will see the power of interfaces to abstractly define the types of things our classes will do, which leaves us free to perform the tricks we were talking about earlier - being able to load files without worrying too closely about the type, and being able to play a media type without knowing in advance what kind of media we're dealing with.  We also see how exceptions are useful in reporting errors without disrupting the flow of code.
+	  </p><p>
+	  <span class="section">Rules</span>
+	  </p><ol>
+	      <li><span class="notice">This project is an individual effort; the Honor Code applies</span></li>
+		  <li>You may import Java built-in libraries, although avoid doing so unless necessary.</li>
+		  <li>You may add your own helper methods or data fields, but they should be private or protected.  You may add additional constructors which are public.</li>
+      </ol>
+	  <span class="section">Instructions:</span>
+	  	  Begin by downloading the provided interfaces, <code>Loadable</code>, <code>Player</code>, <code>StillImage</code>, and <code>AudioStream</code>.
+      <ul>
+        <li><a href="https://mason.gmu.edu/~iavramo2/classes/cs211/s19/Loadable.java">https://mason.gmu.edu/~iavramo2/classes/cs211/s19/Loadable.java</a></li>
+        <li><a href="https://mason.gmu.edu/~iavramo2/classes/cs211/s19/Player.java">https://mason.gmu.edu/~iavramo2/classes/cs211/s19/Player.java</a></li>
+        <li><a href="https://mason.gmu.edu/~iavramo2/classes/cs211/s19/StillImage.java">https://mason.gmu.edu/~iavramo2/classes/cs211/s19/StillImage.java</a></li>
+        <li><a href="https://mason.gmu.edu/~iavramo2/classes/cs211/s19/AudioStream.java">https://mason.gmu.edu/~iavramo2/classes/cs211/s19/AudioStream.java</a></li>
+	  </ul>
+      <p>
+	  The interfaces can be described as follows:
+	  </p><ul>
+	    <li><code>Loadable</code>: a media format which can be loaded.  We're assuming that we've read the contents of a file into an array of integers already, and are passing that integer data into this interface to try to load the media.  Any class which implements this interface would need to be able to do two things: to <code>match</code> the data to the format (in other words, to check the format of the input data, and see if it matches this media format); and to <code>load</code> the data and use it to create a new instance of this loadable.  We can see an example of how it could be used below:
+		<div class="code"><code>
+			Loadable xyzImageLoader = new XyzImageLoader();<br>
+		    int[] data1 = mediaPlayer.read("image1.xyz");<br>
+			int[] data2 = mediaPlayer.read("image2.xyz");<br>
+			Loadable img1 = null, img2 = null;<br>
+			if (xyzImageLoader.match(data1)) img1 = xyzImageLoader.load(data1);<br>
+			if (xyzImageLoader.match(data2)) img2 = xyzImageLoader.load(data2);<br>
+		</code></div></li>
+		<li><code>Player</code>: once we've loaded some piece of media, we'd like to be able to play it.  This class describes some kind of media player (although the kind of player isn't specified - it could be audio, for instance, but it could be something else).  Classes which implement this interface are ready to play media which has been loaded already.  Any such class would need to be able to do the following two things: to check if the player <code>canPlay</code> the loaded media; and also to actually <code>play</code> the media.  For example:
+		<div class="code"><code>
+			Loadable media = mediaPlayer.load("media_file.fmt");<br>
+			Player videoPlayer = new VideoPlayer();<br>
+			Player audioPlayer = new SystemAudioPlayer();<br>
+			if (videoPlayer.canPlay(media)) videoPlayer.play(media);<br>
+			else if (audioPlayer.canPlay(media)) audioPlayer.play(media);<br>
+		</code></div></li>
+		<li><code>StillImage</code>: this represents an ordinary, still image, like something you'd take with your camera.  It has three methods: its <code>width</code> in pixels; its <code>height</code> in pixels; and a <code>getPixel</code> which gets the value of the pixel at the chosen coordinates.  The coordinates <code>(0, 0)</code> represent the value of the pixel in the upper left of the image; the <code>x</code> coordinate goes from left to right, and the <code>y</code> coordinate goes from top to bottom.  The pixel value returned by <code>getPixel</code> is a number which we assume to be in the range of brightness from 0 to 999, where 0 is black and 999 is white.</li>
+		<li><code>AudioStream</code>: this represents a stream of audio data.  The audio data itself will be a stream of numbers representing the amplitude of the audio wave; we will assume that it ranges from -999 to 999.  The interface has three methods: a <code>freq</code> method which indicates the playback frequency of the audio (since we will do text output in this project instead of true audio, this method won't have much practical effect, but we still include it for completeness); a <code>next</code> method to retreive the next point from the audio wave; and a <code>hasNext</code> method to tell us if we've reached the end of the audio data.  Since streaming data is known for updating on the fly, we use <code>next</code>/<code>hasNext</code> to read the next data point, instead of using some kind of <code>getValueAt</code> to retrieve audio from anywhere in the sound wave.
+		
+	  </li></ul>
+	  Now that we know what each of these interfaces are for, let's use them to write some classes.
+      <p>
+	  <span class="section">LoadException Task:</span><br>
+	  <code>public class LoadException</code>, which is an <code>Exception</code>
+	  </p><p>
+	  (<i>5pts</i>) We will use this class when we need to throw an exception to indicate a problem loading a media file.  We
+	  would only need to have a constructor:
+	  </p><p>
+	  </p><ul>
+	    <li><code>public LoadException(String msg)</code> initializes the exception using the given error message (use the <code>msg</code> to initialize the parent's constructor).</li>
+	  </ul>
+	  <p>
+	  <span class="section">LoadableImage Task:</span><br>
+	  <code>public class LoadableImage</code>, which is both a <code>Loadable</code> and a <code>StillImage</code>
+	  </p><p>
+      (<i>15pts</i>) We know what a loadable is and we know what an image is.  Let's put them together to make an image which we can load.  Our input, like with any media format in this project, will be an array of integers.  In this array, a <code>LoadableImage</code> would be indicated by the number <code>55</code> appearing in the first spot in the array (we chose this number arbitrarily - don't expect a deeper reason).  What does this mean?  If the first number in the input is a 55, then that means that the input represents a <code>LoadableImage</code>.  If it is not, then that means that the input is something different - whatever it is, it is not a <code>LoadableImage</code>.  This idea is called a <i>magic number</i>.  Most real-world file formats use a special value or combination of values at the beginning of the file to indicate what file type it is (for example, every <code>.pdf</code> file begins with the characters <code>%PDF</code> - you can check this yourself).
+	  </p><p>
+	  When loading the image from the data, the two numbers after the first spot would represent the width and the height, respectively.  Every position after that represents the pixel value at a particular position, going from left to right and top to bottom.  Thus, if we have the following input data, the resulting image would be a 5x5 "X" pattern:
+	  </p><div class="code"><code>55 5 5 999 0 0 0 999 0 999 0 999 0 0 0 999 0 0 0 999 0 999 0 999 0 0 0 999</code></div>
+	  <p>
+	  Our class will need to provide functionality to load an image, as well as to access the image data once it has been loaded.  Our class is actually doing double-duty: we can use it to represent a loader for image data, as well as to
+	  represent the image once it has been loaded.  To do this, we need the following methods:
+	  </p><p>
+	  </p><ul>
+	    <li><code>public LoadableImage()</code> a default constructor.</li>
+		<li><code>public LoadableImage(int w, int h)</code> (<i>not required but recommended</i>) initialize a <code>LoadableImage</code> with the given width and height.</li>
+        <li><code>public boolean matches(int[] data)</code> indicates whether the provided input data matches a loadable image format.  That is, it returns true if the first element of <code>data</code> is <code>55</code>, and false if it is not, or if there is no first element of <code>data</code>.</li>
+		<li><code>public LoadableImage load(int[] data) throws LoadException</code> creates a new <code>LoadableImage</code>, loads it with the given data, and returns the result.  If the input is not well-formed (meaning that there is no width or height elements in the input, or if there isn't enough pixel data to match the dimensions of the picture, or if the pixel data is outside of the bounds 0-999), then this method should throw a <code>LoadException</code>.  If the input data is ok, then this class should construct a new <code>LoadableImage</code> with the dimensions specified by the input data.  Then, it should intialize the pixel data in the new <code>LoadableImage</code> using the input data.  Finally, it should return the resulting image.<br>  
+		<i>Tip: it is ok to access private methods from within a new <code>LoadableImage</code> here, because it is the same class type as this class.</i></li>
+        <li><code>public int width()</code> returns the width of a loaded image, in pixels. There is no specified behavior if this is called without loading an image first (there is no wrong answer in that case).</li>   
+		<li><code>public int height()</code> returns the height of a loaded image, in pixels.  There is no specified behavior if this is called without loading an image first (there is no wrong answer in that case).</li>
+        <li><code>public int getPixel(int x, int y)</code> returns the pixel value at coordinates <code>(x, y)</code> in the image.  If someone asks for an out-of-bounds value, it's ok to throw an exception (which is likely what would happen
+		by default).  There is no specified behavior if this is called without loading an image first (there is no wrong answer in that case).</li>
+	  </ul>
+	  <p>
+	  <span class="section">ImageViewer Task:</span><br>
+	  <code>public abstract class ImageViewer</code>, which is a <code>Player</code>
+	  </p><p>
+	  (<i>10pts</i>) This class provides the abstract viewer functionality used to "play" still images (when we say this, we really mean display the images).  This player represents the basis for any image viewer used by the multimedia player, however, it has an abstract viewing method which does not restrict the way it displays images.  This class should provide the following:
+	  </p><p>
+      </p><ul>
+	    <li><code>public ImageViewer()</code> a default constructor (this shouldn't need to do much if anything).</li>
+        <li><code>public abstract void view(StillImage img)</code> yet-to-be-defined functionality for viewing images.</li>
+		<li><code>public boolean canPlay(Loadable l)</code> indicates whether the provided loadable is playable by this player.  It should return <code>true</code> if the input <code>l</code> is a <code>StillImage</code>, and <code>false</code> if it is not.</li>
+        <li><code>public void play(Loadable l)</code> plays (views) the input loadable <code>l</code>, using a call to the <code>view</code> method.</li>
+	  </ul>
+	  <p>
+	  <span class="section">TextImageViewer Task:</span><br>
+	  <code>public class TextImageViewer</code>, which is an <code>ImageViewer</code>
+	  </p><p>
+	  (<i>10pts</i>) Now we'll write our first actual, working media viewer.  This one will work by representing pixels as text art (the brighter the pixel, the larger the corresponding character which is printed, assuming a white-on-black screen).  So for every line of pixels, we would print out the string of characters which correspond to each pixel in that row.  It might give us an output such as this (using the "X" picture data descibed above in the <code>LoadableImage</code> section):
+	  </p><div class="code"><code>
+	    @&nbsp;&nbsp;&nbsp;@<br>
+	    &nbsp;@&nbsp;@&nbsp;<br>
+	    &nbsp;&nbsp;@&nbsp;&nbsp;<br>
+	    &nbsp;@&nbsp;@&nbsp;<br>
+	    @&nbsp;&nbsp;&nbsp;@<br>
+	  </code></div>
+	  <p>
+	  We would only need three methods in this class, one of which will be given to you to ensure consistency across implementations:
+	  </p><p>
+	  </p><ul>
+	    <li><code>public TextImageViewer()</code> a default constructor (it might not be necessary to do much here).</li>
+		<li><code>public char getChar(int i)</code> this will retreive the text character corresponding to a given pixel value.  To avoid inconsistency, use the following implementation:
+		<div class="code"><code>  
+          private final char[] vals = {' ', '.', 'o', 'O', '@'};<br>
+          public char getChar(int i) {<br>
+          &nbsp;&nbsp;return vals[(int)( i*(vals.length/1000.0) )];<br>
+          }<br>
+		</code></div></li>
+        <li><code>public void view(StillImage img)</code> for the given input image, print out the characters corresponding to its pixels data as described above.  Use the <code>getChar</code> method to get the character to print for each pixel in
+		the image.</li>
+	  </ul>
+	  <p>
+	  <span class="section">LoadableAudio Task:</span><br>
+	  <code>public class LoadableAudio</code>, which is both a <code>Loadable</code> and an <code>AudioStream</code>
+	  </p><p>
+      (<i>15pts</i>) We have already written a <code>LoadableImage</code> class.  This one follows a similar idea, but is used for audio data.  We will assume a simple audio model here: a single channel, represented by a sequence of amplitude values (numbers ranging from -999 to 999) which form the audio wave.  Like the <code>LoadableImage</code>, we will initialize our object using data from the input.  However, when we read back the audio data, we will read it back one data point at a time using a <code>next()</code> method, so we will need some kind of variable to keep track of how far we've gotten so far.  
+	  </p><p>
+	  The input data format is straightforward.  The first three numbers must be <code>3</code>, <code>2</code>, and <code>1</code>, in that order, to be a <code>LoadableAudio</code> file.  Otherwise, it must be some different format.  The fourth number in the input data is a playback frequency value (which we would need to store, but has no other practical use in this project, because the playback is sent to the terminal).  Everything after that is the audio wave.  We need the following:
+	  </p><p>
+	  </p><ul>
+	    <li><code>public LoadableAudio()</code> a default constructor.</li>
+        <li><code>public LoadableAudio(int frequency, int size)</code> (<i>not required, but recommended</i>) initializes the object using the given frequence and audio data size (the number of data points of audio amplitude data).</li>
+        <li><code>public boolean matches(int[] data)</code> returns <code>true</code> if the first three elements of <code>data</code> are <code>3</code>, <code>2</code>, and <code>1</code>, in that order, and <code>false</code> otherwise, or if there are less than three elements of <code>data</code>.</li>
+        <li><code>public LoadableAudio load(int[] data) throws LoadException</code> creates a new <code>LoadableAudio</code>, loads it with the given data, and returns the result.  If the input is not well-formed (meaning that there is no frequency element in the input, or if the amplitude data is outside of the bounds -999-999), then this method should throw a <code>LoadException</code>.  If the input data is ok, then this class should construct a new <code>LoadableAudio</code>.  Then, it should intialize the audio data in the new <code>LoadableAudio</code> using the input data.  Finally, it should return the resulting object.</li>
+        <li><code>public int freq()</code> returns the playback frequency of the loaded audio data.</li>
+        <li><code>public int next()</code> returns the next element of audio data from the current playback.</li>
+        <li><code>public boolean hasNext()</code> returns <code>true</code> for as long as there is still data left to play (i.e. for as long as the <code>next()</code> call has not stepped through all of the audio data yet).</li>
+	  </ul>
+	  <p>
+	  <span class="section">AudioPlayer Task:</span><br>
+	  <code>public abstract class AudioPlayer</code>, which is a <code>Player</code>
+	  </p><p>
+	  (<i>10pts</i>) Like the abstract <code>ImageViewer</code>, this class provides the abstract player functionality used to play audio files.  This player represents the basis for any audio player which is incorporated into the multimedia player, however, it has an abstract playback method which does not restrict the way it plays audio.  This class should provide the following:
+	  </p><p>
+      </p><ul>
+	    <li><code>public AudioPlayer()</code> a default constructor (this shouldn't need to do much if anything).</li>
+        <li><code>public abstract void playback(AudioStream aud)</code> yet-to-be-defined functionality for playing audio.</li>
+		<li><code>public boolean canPlay(Loadable l)</code> indicates whether the provided loadable is playable by this player.  It should return <code>true</code> if the input <code>l</code> is an <code>AudioStream</code>, and <code>false</code> if it is not.</li>
+        <li><code>public void play(Loadable l)</code> plays the input loadable <code>l</code>, using a call to the <code>playback</code> method.</li>
+	  </ul>
+	  <p>
+	  <span class="section">TextAudioPlayer Task:</span><br>
+	  <code>public class TextAudioPlayer</code>, which is an <code>AudioPlayer</code>
+	  </p><p>
+	  (<i>10pts</i>) Just like the text-based image viewer, we will now write a text-based audio player.  How do we do this for audio?  By displaying the output sound wave on the terminal, much like an oscilloscope.  We have a stream of audio data, we just need figure out where each point of that data fits on a line of the terminal, and print out that point one line at a time.  Our output might look something like this:
+	  </p><div class="code"><code>
+	    *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+	    *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+	    *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+	    &nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+	    &nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;<br>
+	    &nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;<br>
+	    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<br>
+	    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+	    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+	    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+	    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<br>
+	    &nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;<br>
+	    &nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;<br>
+	    &nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+	    *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+	    *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+	  </code></div>
+	  <p>
+	  We would only need two methods in this class:
+	  </p><p>
+	  </p><ul>
+	    <li><code>public TextAudioPlayer()</code> a default constructor (it might not be necessary to do much here).</li>
+        <li><code>public void playback(AudioStream aud)</code> the given input audio will come as a stream of numbers representing audio amplitudes.  For each data point, print out a line containing a <code>"*"</code>, with the position of the asterisk depending on the amplitude of the data point.  Do this until the audio data has been exhausted (until <code>hasNext()</code> is <code>false</code>).  The position of the asterisk on the terminal line should be given by the following expression (where a zero corresponds to the first position in the line):
+		<div class="code"><code>int pos = (val+1000)*7/200;</code></div>
+		</li>
+	  </ul>	  
+	  <p>
+	  <span class="section">MultimediaPlayer Task:</span><br>
+	  <code>public class MultimediaPlayer</code>, which is both a <code>Player</code> and a <code>Loadable</code>
+	  </p><p>
+	  (<i>25pts</i>) This is our big one, where we put it all together.  This class will aggregate several <code>Loadable</code> classes, which allows it to load a media file.  We will use this to make the <code>MultimediaPlayer</code> <code>Loadable</code> itself.  Likewise, the class will aggregate several <code>Player</code>s, which will allow us to make this a <code>Player</code> itself.  We will want to implement it from its parts:
+	  </p><p>
+	  </p><ul>
+	    <li><code>public MultimediaPlayer()</code> a default constructor.  This class should internally contain both a <code>TextImageViewer</code> and a <code>TextAudioPlayer</code> for image and audio playing.  Additionally, it should internally contain the <code>LoadableImage</code> and <code>LoadableAudio</code> loaders (and for the honors section, the <code>CompressedImage</code> loader as well).</li>
+        <li><code>public void add(Loadable l)</code> add an additional media loader to the aggregate.</li>
+		<li><code>public boolean canPlay(Loadable l)</code> indicates whether the multimedia player can play the input <code>Loadable</code>, by checking whether any of its internal <code>Player</code>s <code>canPlay</code> the media.</li>
+        <li><code>public void play(Loadable l)</code> play back the input media, by searching the internal <code>Player</code>s and finding one which supports the <code>Loadable</code>.  If one is found, then use it to play the input media, otherwise do nothing.</li>
+        <li><code>public int[] read(String filename) throws LoadException, IOException</code> reads the text data contained in the file and return the result as an array of integers.  We are assuming that the input data is a series of numbers written in human-readable text.  If the data is not in that format (if it contains tokens which are not integers), then this method should throw a <code>LoadException</code>.  To read numbers from a file, we can use an ordinary <code>Scanner</code> which we've opened as follows:
+		<div class="code"><code>
+		Scanner s = new Scanner(new File(filename));
+		</code></div><br>
+		<i>Tip 1: When we use a <code>Scanner</code> for reading a file, we have to remember to call <code>close()</code> on it when we are done, as well as to import <code>java.util.Scanner</code>, <code>java.io.IOException</code>, and <code>java.io.File</code>.</i><br>
+		<i>Tip 2: It may help to pass through the file twice: the first time to count the number of tokens in the file and validate proper format, and the second time to actually read in and store the data.</i></li> 
+        <li><code>public boolean matches(int[] data)</code> indicates whether the multimedia player is able to load the input media data, by checking whether any of the internal loaders recognize the format.</li>
+        <li><code>public Loadable load(int[] data) throws LoadException</code> loads the input media, by looking through all of the internal loaders and finding one which recognizes the format.  If none are found, then this method should throw a <code>LoadException</code>.</li>
+        <li><code>public void play(String filename) throws LoadException, IOException</code> plays back the media file specified by the given filename.  This would most likely be done in three phases: first, <code>read</code> the file into an an array; second, use the array to <code>load</code> the media; third, <code>play</code> the resulting <code>Loadable</code>.</li>
+	  </ul>
+	  <p>
+	  Some things to think about when implementing this player:
+	  </p><ul>
+	    <li>If we wanted to support more data types, how would that work? Would it make a difference if they were a variation on an existing type?
+		</li><li>What do we do if we want to make a player for another media type (such as video)?  Since video is both audio and visual, is there a way to show just one or the other?  What if we wanted to make a media format more complex (like adding color to images, or multiple channels to audio)?
+		</li><li>What do we do if we have more than one player for the same type of media (like both a text output and a graphical output)?  How would we select between the two?
+	  </li></ul>
+	  <p>
+	  <span class="section">Honors Section:</span><br>
+	  <span class="notice">If you are in the honors section, you must complete this part 
+	  and it is worth 20 points of the project grade.  If you are not in the honors section,
+	  you are welcome to attempt this but you do not need to complete it and it is not worth any points if you do.</span><br>
+	  <code>public class CompressedImage</code> which is a <code>LoadableImage</code>
+	  </p><p>
+	  The <code>CompressedImage</code> class is nearly the same as its parent, but it needs to override the <code>matches</code> and <code>load</code> methods. This class will match an input data format if the first number in the input is <code>56</code>, not <code>55</code> like with the parent.  Additionally, the input image format will use a simple form of compression: after every pixel value there is a number indicating how many times that pixel repeats.  So for example, the following two inputs produce the same image:
+	  </p><div class="code"><code>55 3 3 0 0 0 0 0 999 999 999 999</code></div>
+	  <div class="code"><code>56 3 3 0 5 999 4</code></div>
+	  <p>
+	  Additionally, you will be required to write a <code>main</code> method which recognizes command line parameters. Each command line parameter will represent one media file (of any supported type).  These should be loaded and played back in order by your media player.  If any media file results in a thrown exception, the program should print the following (where <code>FILENAME</code> is the name of the file which failed) and skip to the next file:
+	  </p><div class="code"><code>Error playing FILENAME</code></div>
+	  <p>
+	  <span class="section">Testing:</span>
+	  </p><p>
+      </p><ul>
+        <li><a href="https://mason.gmu.edu/~iavramo2/classes/cs211/junit-cs211.jar">https://mason.gmu.edu/~iavramo2/classes/cs211/junit-cs211.jar</a></li>	  
+        <li><a href="https://mason.gmu.edu/~iavramo2/classes/cs211/s19/P3tester.java">https://mason.gmu.edu/~iavramo2/classes/cs211/s19/P3tester.java</a></li>
+        <li><a href="https://mason.gmu.edu/~iavramo2/classes/cs211/s19/P3testdata.zip">https://mason.gmu.edu/~iavramo2/classes/cs211/s19/P3testdata.zip</a></li>
+        <li><a href="https://mason.gmu.edu/~iavramo2/classes/cs211/s19/Converter.java">https://mason.gmu.edu/~iavramo2/classes/cs211/s19/Converter.java</a></li>
+	  </ul>
+      <p>
+	  The files in the test data zip should be uncompressed into your working directory.
+	  </p><p>
+	  The <code>Converter</code> program is an optional utility which will allow you to take an existing image and convert into the format used for this project, for the sake of testing.
+   	  </p><p>
+	  <span class="section">Submission:</span>
+	  </p><p>	  
+	  Submission instructions are as follows.
+	  </p><ol>
+	    <li>Let <i>xxx</i> be your lab section number, and let <i>yyyyyyyy</i> be
+		  your GMU userid.  Create the directory <code><i>xxx</i>_<i>yyyyyyyy</i>_P3/</code></li>
+		<li>Place your files in the directory you've just created.</li>
+		<li>Create the file <code>ID.txt</code> in the format shown below, containing your name, userid, G#, lecture section 
+		  and lab section, and add it to the directory.
+		  <p>
+		  <i>Full Name: Donald Knuth<br>
+		  userID: dknuth<br>
+		  G#: 00123456<br>
+		  Lecture section: 004<br>
+		  Lab section: 213<br>
+		  </i>
+		</p></li>
+		<li>compress the folder and its contents into a .zip file, and upload the file to Blackboard.</li>
+	  </ol>
+	  
+	</div>
+  
+</body></html>
