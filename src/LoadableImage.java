@@ -67,7 +67,7 @@ public class LoadableImage implements Loadable, StillImage {
         }
 
         //SparseMatrix keyValue implementation
-        return data[((x * width()) + y) + 3];
+        return grid[x][y];
     }
 
     private boolean checkData(int[] data) {
@@ -85,9 +85,10 @@ public class LoadableImage implements Loadable, StillImage {
     private int[][] initGrid(int[] data) {
         int[][] to2D = new int[data[1]][data[2]];
 
+        //SparseMatrix expansion
         for (int row = 0; row < data[1]; row++) {
             for (int col = 0; col < data[2]; col++) {
-                to2D[row][col] = data[row * data[1] + col];
+                to2D[row][col] = data[(row * data[1] + col) + 3];
             }
         }
 
