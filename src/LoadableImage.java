@@ -14,12 +14,19 @@ public class LoadableImage implements Loadable, StillImage {
 
     @Override
     public boolean matches(int[] data) {
-        return false;
+        return data[0] == 55;
     }
 
     @Override
     public Loadable load(int[] data) throws LoadException {
-        return null;
+        try {
+            if (!checkData(data))
+                throw new LoadException("Improperly formatted data");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return new LoadableImage(data[1], data[2]);
     }
 
     @Override
@@ -34,6 +41,20 @@ public class LoadableImage implements Loadable, StillImage {
 
     @Override
     public int getPixel(int x, int y) {
-        return 0;
+        //
+
+
     }
+
+    private boolean checkData(int[] data) {
+        if (!matches(data))
+            return false;
+
+        if (data[1] == 0 || data[2] == 0)
+            return false;
+
+        return data.length - 3 > data[1] * data[2];
+    }
+
+    private
 }
