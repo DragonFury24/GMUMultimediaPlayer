@@ -3,8 +3,9 @@ public class LoadableImage implements Loadable, StillImage {
     int width;
     int height;
 
-    int[] data;
+    int[]   data;
     int[][] grid;
+
     public LoadableImage() {
 
     }
@@ -35,36 +36,24 @@ public class LoadableImage implements Loadable, StillImage {
 
     @Override
     public int width() {
-        try {
-            if (width == 0)
-                throw new Exception("No data loaded.");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        if (width == 0)
+            NoDataLoadedException();
+        
         return width;
     }
 
     @Override
     public int height() {
-        try {
-            if (height == 0)
-                throw new Exception("No data loaded.");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        if (height == 0)
+            NoDataLoadedException();
 
         return height;
     }
 
     @Override
     public int getPixel(int x, int y) {
-        try {
-            if (data == null)
-                throw new Exception("No data loaded.");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        if (data == null)
+            NoDataLoadedException();
 
         //SparseMatrix keyValue implementation
         return grid[x][y];
