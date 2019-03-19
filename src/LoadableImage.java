@@ -33,6 +33,13 @@ public class LoadableImage implements Loadable, StillImage {
 
     @Override
     public int width() {
+        try {
+            if (width == 0)
+                throw new Exception("No data loaded.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return width;
     }
 
