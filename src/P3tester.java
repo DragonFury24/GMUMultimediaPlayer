@@ -399,9 +399,11 @@ public class P3tester {
                                "oOOo..oo.ooo...oo..o..o..ooo..oo..oo.oo.oooo.o.oOOOOO@oOoo..o...\n" +
                                "oooooo....o..oo..ooooo...oooo.o...o..o.ooo.o.oooOooOOOOOoooooooo\n";
 
-    /** the lines below are for setting up input/output redirection so that the
+    /**
+     * the lines below are for setting up input/output redirection so that the
      * tests can see what is being set to the screen as well as produce its own
-     * pseudo-keyboard input.  No test appear below here. */
+     * pseudo-keyboard input.  No test appear below here.
+     */
 
     static ByteArrayOutputStream localOut, localErr;
     static PrintStream sOut, sErr;

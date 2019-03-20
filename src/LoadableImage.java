@@ -23,37 +23,27 @@ public class LoadableImage implements Loadable, StillImage {
     }
 
     @Override
-    public Loadable load(int[] data) throws LoadException {
-        try {
-            if (!checkData(data))
-                throw new LoadException("Improperly formatted data");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public LoadableImage load(int[] data) throws LoadException {
+        if (!checkData(data))
+            throw new LoadException("Improperly formatted data");
 
         return new LoadableImage(data[1], data[2], data);
     }
 
     @Override
     public int width() {
-        if (width == 0)
-            NoDataLoadedException();
-        
         return width;
     }
 
     @Override
     public int height() {
-        if (height == 0)
-            NoDataLoadedException();
-
         return height;
     }
 
     @Override
     public int getPixel(int x, int y) {
         if (data == null)
-            NoDataLoadedException();
+            return -1;
 
         //SparseMatrix keyValue implementation
         return grid[x][y];
@@ -69,14 +59,6 @@ public class LoadableImage implements Loadable, StillImage {
 
         //number of supplied values are greater than width * height
         return data.length - 3 > data[1] * data[2];
-    }
-
-    public void NoDataLoadedException() {
-        try {
-            throw new Exception("No data loaded.");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     private int[][] initGrid(int[] data) {
