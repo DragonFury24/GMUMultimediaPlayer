@@ -2,19 +2,16 @@ public class LoadableImage implements Loadable, StillImage {
 
     int width;
     int height;
-
-    int[]   data;
     int[][] grid;
 
     public LoadableImage() {
 
     }
 
-    public LoadableImage(int w, int h, int[] data) {
+    public LoadableImage(int w, int h, int[][] gridData) {
         width = w;
         height = h;
-        this.data = data;
-        grid = initGrid(data);
+        grid = gridData;
     }
 
     @Override
@@ -27,7 +24,7 @@ public class LoadableImage implements Loadable, StillImage {
         if (!checkData(data))
             throw new LoadException("Improperly formatted data");
 
-        return new LoadableImage(data[1], data[2], data);
+        return new LoadableImage(data[1], data[2], initGrid(data));
     }
 
     @Override
@@ -42,7 +39,7 @@ public class LoadableImage implements Loadable, StillImage {
 
     @Override
     public int getPixel(int x, int y) {
-        if (data == null)
+        if (grid == null)
             return -1;
 
         //SparseMatrix keyValue implementation
