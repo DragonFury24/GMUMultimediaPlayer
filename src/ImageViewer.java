@@ -4,7 +4,7 @@ public abstract class ImageViewer implements Player{
 
     }
 
-    public abstract  void view(StillImage img);
+    public abstract void view(StillImage img);
 
     public boolean canPlay(Loadable l) {
         return l instanceof StillImage;

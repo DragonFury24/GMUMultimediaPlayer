@@ -50,21 +50,31 @@ public class LoadableImage implements Loadable, StillImage {
         if (!matches(data))
             return false;
 
+        if (data.length < 3)
+            return false;
         //Check if proper width/height values are given
         if (data[1] == 0 || data[2] == 0)
             return false;
 
         //number of supplied values are greater than width * height
-        return data.length - 3 > data[1] * data[2];
+        if (data.length - 3 != data[1] * data[2])
+            return false;
+
+        for (int value : data) {
+            if (value > 999 || value < 0)
+                return false;
+        }
+
+        return true;
     }
 
     private int[][] initGrid(int[] data) {
         int[][] to2D = new int[data[1]][data[2]];
 
         //SparseMatrix expansion
-        for (int row = 0; row < data[1]; row++) {
-            for (int col = 0; col < data[2]; col++) {
-                to2D[row][col] = data[(row * data[1] + col) + 3];
+        for (int col = 0; col < data[1]; col++) {
+            for (int row = 0; row < data[2]; row++) {
+                to2D[col][row] = data[(row * data[1] + col) + 3];
             }
         }
 

@@ -1,5 +1,7 @@
 public interface AudioStream {
-  int freq();
-  int next();
-  boolean hasNext();
+    int freq();
+
+    int next();
+
+    boolean hasNext();
 }

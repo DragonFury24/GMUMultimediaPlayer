@@ -10,6 +10,12 @@ public class TextImageViewer extends ImageViewer {
 
     @Override
     public void view(StillImage img) {
-        
+        for (int x = 0; x < img.width(); x++) {
+            for (int y = 0; y < img.height(); y++) {
+                System.out.print(getChar(img.getPixel(x, y)));
+            }
+
+            System.out.println();
+        }
     }
 }
