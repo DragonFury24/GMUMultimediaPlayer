@@ -1,7 +1,17 @@
 public class LoadableAudio implements Loadable, AudioStream {
+    int frequency;
+    int size;
+
+    public LoadableAudio() {}
+
+    public LoadableAudio(int freq, int size) {
+        frequency = freq;
+        this.size = size;
+    }
+
     @Override
     public int freq() {
-        return 0;
+        return frequency;
     }
 
     @Override
@@ -16,7 +26,10 @@ public class LoadableAudio implements Loadable, AudioStream {
 
     @Override
     public boolean matches(int[] data) {
-        return false;
+        if (data.length < 3)
+            return false;
+
+        return data[0] == 3 && data[1] == 2 && data[2] == 1;
     }
 
     @Override
