@@ -5,6 +5,4 @@ public class TextAudioPlayer extends AudioPlayer {
     public void playback(AudioStream aud) {
 
     }
-
-
 }

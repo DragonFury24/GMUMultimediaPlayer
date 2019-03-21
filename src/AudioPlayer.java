@@ -7,5 +7,8 @@ public abstract class AudioPlayer implements Player {
         return l instanceof AudioStream;
     }
 
-    public void play (Loadable l) {}
+    public void play (Loadable l) {
+        if (canPlay(l))
+            playback((AudioStream) l);
+    }
 }
