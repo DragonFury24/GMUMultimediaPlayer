@@ -26,7 +26,7 @@ public class LoadableAudio implements Loadable, AudioStream {
 
     @Override
     public boolean matches(int[] data) {
-        if (data.length < 3)
+        if (data.length < 4)
             return false;
 
         return data[0] == 3 && data[1] == 2 && data[2] == 1;
@@ -34,7 +34,7 @@ public class LoadableAudio implements Loadable, AudioStream {
 
     @Override
     public LoadableAudio load(int[] data) throws LoadException {
-        if (!matches(data))
+        if (!checkData(data))
             throw new LoadException("Improperly formatted data.");
 
         return new LoadableAudio(data[4], data.length - 4);
@@ -44,11 +44,8 @@ public class LoadableAudio implements Loadable, AudioStream {
         if (!matches(data))
             return false;
 
-        if (data.length < 4)
-            return false;
-
         for (int value : data) {
-            if ( value > 999 || value < -999)
+            if (value > 999 || value < -999)
                 return false;
         }
 
