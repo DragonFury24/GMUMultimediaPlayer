@@ -34,6 +34,24 @@ public class LoadableAudio implements Loadable, AudioStream {
 
     @Override
     public LoadableAudio load(int[] data) throws LoadException {
-        return null;
+        if (!matches(data))
+            throw new LoadException("Improperly formatted data.");
+
+        return new LoadableAudio(data[4], data.length - 4);
+    }
+
+    private boolean checkData(int[] data) {
+        if (!matches(data))
+            return false;
+
+        if (data.length < 4)
+            return false;
+
+        for (int value : data) {
+            if ( value > 999 || value < -999)
+                return false;
+        }
+
+        return true;
     }
 }
