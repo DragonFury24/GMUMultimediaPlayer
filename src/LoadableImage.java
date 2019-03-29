@@ -50,16 +50,19 @@ public class LoadableImage implements Loadable, StillImage {
         if (!matches(data))
             return false;
 
+        //Check that width and height values exist
         if (data.length < 3)
             return false;
+
         //Check if proper width/height values are given
         if (data[1] == 0 || data[2] == 0)
             return false;
 
-        //number of supplied values are greater than width * height
+        //number of supplied values are equal to width * height
         if (data.length - 3 != data[1] * data[2])
             return false;
 
+        //check that all elements are between the interval 0 < x <= 999
         for (int value : data) {
             if (value > 999 || value < 0)
                 return false;
