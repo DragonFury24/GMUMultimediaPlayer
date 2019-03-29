@@ -73,7 +73,6 @@ public class MultimediaPlayer implements Player, Loadable {
     public Loadable load(int[] data) throws LoadException {
         for (Loadable m : loaders)
             if (m.matches(data)) {
-                String temp = m.getClass().toGenericString().split(" " )[2];
                 switch (m.getClass().toGenericString().split(" ")[2]) {
                     case "LoadableAudio":
                         return new LoadableAudio().load(data);
@@ -82,7 +81,7 @@ public class MultimediaPlayer implements Player, Loadable {
                 }
             }
 
-        return null;
+        throw new LoadException("Improperly formatted data.");
     }
 
     @Override
@@ -96,10 +95,16 @@ public class MultimediaPlayer implements Player, Loadable {
 
     @Override
     public void play(Loadable l) {
-
+        for (Player p : players)
+            if (p.canPlay(l))
+                p.play(l);
     }
 
     public void play(String filename) throws LoadException, IOException {
+        int[] data = read(filename);
+        Loadable loader = load(data);
 
+        if (canPlay(loader))
+            play(loader);
     }
 }
