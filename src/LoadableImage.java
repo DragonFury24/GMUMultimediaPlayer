@@ -1,8 +1,8 @@
 public class LoadableImage implements Loadable, StillImage {
 
-    int width;
-    int height;
-    int[][] grid;
+    private int width;
+    private int height;
+    private int[][] grid;
 
     public LoadableImage() {
 
