@@ -1,16 +1,11 @@
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MultimediaPlayer implements Player, Loadable {
-    private TextImageViewer textImageViewer;
-    private TextAudioPlayer textAudioPlayer;
     private Player[]        players;
     private Loadable[]      loaders;
-    private Loadable[]      media;
-    private int             numMedia;
 
     public MultimediaPlayer() {
         players = new Player[2];
@@ -20,14 +15,11 @@ public class MultimediaPlayer implements Player, Loadable {
         loaders = new Loadable[2];
         loaders[0] = new LoadableAudio();
         loaders[1] = new LoadableImage();
-
-        media = new Loadable[0];
     }
 
     public int[] read(String filename) throws LoadException, IOException {
         Scanner scanner = new Scanner(new File("src/" + filename));
         int     data[]  = new int[fileLength(filename)];
-
 
         for (int i = 0; i < data.length; i++) {
             try {
@@ -54,10 +46,6 @@ public class MultimediaPlayer implements Player, Loadable {
         scanner.close();
 
         return count;
-    }
-
-    public void add(Loadable l) {
-
     }
 
     @Override
